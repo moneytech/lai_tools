@@ -15,6 +15,7 @@ run_py = find_program('aml_tests/run.py')
 aml_test_cases = [
     'arithmetic',
     'bufferfields',
+    'concatrestemplate',
     'frombcd',
     'tobcd',
     'breakpoint',
@@ -25,11 +26,14 @@ aml_test_cases = [
     'implicit_conversion',
     'index',
     'hello',
+    'match',
     'mutex',
     'package',
+    'varpackage',
     'power_res',
     'processor',
     'references',
+    'revision',
     'scopes',
     'field',
     'indexfield',
@@ -40,7 +44,8 @@ aml_test_cases = [
     'tointeger',
     'findsetbit',
     'tostring',
-    'objecttype'
+    'objecttype',
+    'opregion'
 ]
 
 aml_regression_cases = [
@@ -58,6 +63,9 @@ endforeach
 
 test('aml-aml_tests/' + 'fatal.asl', run_py,
         args: [laiexec, files('aml_tests/' + 'fatal.asl')], should_fail: true)
+
+test('aml-aml_tests/' + 'external.asl', laiexec,
+        args: [files('aml_tests/' + 'external.aml')])
 
 foreach f : aml_regression_cases
     test('aml-aml_regressions/' + f + '.asl', run_py,

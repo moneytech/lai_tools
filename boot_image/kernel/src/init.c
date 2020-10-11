@@ -15,8 +15,6 @@
 #include <lai/core.h>
 #include <lai/helpers/sci.h>
 
-void flush_irqs(void);
-
 void kernel_init(void) {
     /* interrupts disabled */
 
@@ -32,8 +30,9 @@ void kernel_init(void) {
 
     init_pmm();
 
+    dmesg_on = true;
+
     kprint(KPRN_INFO, "PIC: Remapping legacy PIC...");
-    flush_irqs();
     map_PIC(0x20, 0x28);
     /* Mask all IRQs */
     set_PIC_mask(-1);
